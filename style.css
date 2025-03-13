@@ -1,0 +1,900 @@
+:root {
+    /* 新的配色方案 - 参考图片的橙色主题 */
+    --primary-color: #ff6b22;      /* 主题橙色 */
+    --primary-light: #ff8c4d;      /* 浅橙色 */
+    --primary-dark: #e65c1c;       /* 深橙色 */
+    --secondary-color: #f5f5f5;    /* 浅灰背景 */
+    --text-color: #333333;         /* 主文本色 */
+    --text-light: #666666;         /* 次要文本 */
+    --white: #ffffff;              /* 白色 */
+    --shadow: 0 2px 8px rgba(255, 107, 34, 0.1);
+    --transition: all 0.3s ease;
+    --card-bg: #ffffff;            
+    --body-bg: #f8f9fa;           
+    
+    /* 类别颜色 */
+    --traditional-color: #ff6b22;  /* 传统搜索 - 橙色 */
+    --ai-color: #4285f4;          /* AI搜索 - 蓝色 */
+    --video-color: #34a853;       /* 视频搜索 - 绿色 */
+
+    --primary-rgb: 255, 107, 34;
+    --card-bg-rgb: 255, 255, 255;
+    --traditional-rgb: 255, 107, 34;
+    --ai-rgb: 66, 133, 244;
+    --video-rgb: 52, 168, 83;
+
+    /* 添加聊天机器人分类的颜色变量 */
+    --chat-color: #ff4081;  /* 粉色 */
+    --chat-rgb: 255, 64, 129;
+
+    /* 添加新的分类颜色变量 */
+    --social-color: #e91e63;  /* 粉红色 */
+    --social-rgb: 233, 30, 99;
+    --drive-color: #9c27b0;   /* 紫色 */
+    --drive-rgb: 156, 39, 176;
+}
+
+.dark-theme {
+    /* 新的配色方案 - 暗色模式 */
+    --primary-color: #ff7b3a;      /* 暖橙色 */
+    --primary-light: #ff8f55;      /* 浅暖橙色 */
+    --primary-dark: #e65c1c;       /* 深暖橙色 */
+    --secondary-color: #2a2a2a;    /* 深灰背景 */
+    --text-color: #e0e0e0;         /* 主文本色 */
+    --text-light: #999999;         /* 次要文本 */
+    --white: #1a1a1a;              /* 深色背景 */
+    --shadow: 0 2px 8px rgba(255, 123, 58, 0.15);
+    --card-bg: #242424;            /* 卡片背景 */
+    --body-bg: #1a1a1a;            /* 页面背景 */
+    
+    /* 类别颜色 - 暗色模式 */
+    --traditional-color: #ff7b3a;  /* 传统搜索 - 暖橙色 */
+    --ai-color: #5c9eff;          /* AI搜索 - 亮蓝色 */
+    --video-color: #4caf50;       /* 视频搜索 - 亮绿色 */
+
+    --card-bg-rgb: 36, 36, 36;
+
+    /* 添加聊天机器人分类的颜色变量 */
+    --chat-color: #ff80ab;  /* 亮粉色 */
+
+    /* 深色模式下的颜色 */
+    --social-color: #ff4081;  /* 亮粉红色 */
+    --drive-color: #ba68c8;   /* 亮紫色 */
+}
+
+/* 添加深色模式下的渐变背景 */
+.dark-theme body {
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    line-height: 1.5;
+    transition: var(--transition);
+    background-image: linear-gradient(to bottom, rgba(255, 123, 58, 0.05), rgba(255, 123, 58, 0));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans SC', 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--body-bg);
+    color: var(--text-color);
+    line-height: 1.5;
+    transition: var(--transition);
+    background-image: linear-gradient(to bottom, rgba(59, 130, 246, 0.03), rgba(59, 130, 246, 0));
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--body-bg);
+    transition: var(--transition);
+}
+
+/* 美化标题 */
+header {
+    text-align: center;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 300; /* 更细的字体 */
+    letter-spacing: 2px; /* 增加字母间距 */
+    background: linear-gradient(120deg, var(--primary-color), var(--primary-dark), var(--primary-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.15); /* 添加微妙阴影 */
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+}
+
+/* 深色模式下的标题样式 */
+.dark-theme h1 {
+    background: linear-gradient(120deg, var(--primary-light), var(--primary-color), var(--primary-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 2px 15px rgba(255, 123, 58, 0.25);
+}
+
+/* 优化副标题样式 */
+.subtitle {
+    color: var(--text-light);
+    font-size: 0.8rem;
+    margin: 5px 0 15px;
+    letter-spacing: 0.8px;
+    font-weight: 400; /* 增加字重以提高可见度 */
+    opacity: 0.9; /* 提高不透明度 */
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+}
+
+.subtitle::before,
+.subtitle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 15px; /* 增加装饰线长度 */
+    height: 1px;
+    background: linear-gradient(to right, transparent, currentColor); /* 使用currentColor跟随文字颜色 */
+    opacity: 0.6; /* 提高装饰线可见度 */
+}
+
+/* 深色模式下的副标题样式 */
+.dark-theme .subtitle {
+    color: rgba(255, 255, 255, 0.8); /* 提高深色模式下的对比度 */
+}
+
+/* 深色模式下的装饰线样式 */
+.dark-theme .subtitle::before,
+.dark-theme .subtitle::after {
+    opacity: 0.4; /* 调整深色模式下装饰线的透明度 */
+}
+
+h1 i {
+    color: var(--primary-color);
+}
+
+/* 美化搜索框 */
+.search-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto 40px;
+}
+
+.search-box {
+    display: flex;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    border: 2px solid #e0e0e0;
+    transition: var(--transition);
+    padding: 5px;
+}
+
+.search-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(255, 107, 34, 0.15);
+}
+
+#search-input {
+    flex: 1;
+    padding: 15px 25px;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+#search-button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 0 35px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+#search-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 历史记录下拉框 */
+.history-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin-top: 10px;
+    z-index: 10;
+    display: none;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.history-dropdown.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.history-header span {
+    font-weight: 500;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 22px;
+}
+
+.history-header span::before {
+    content: '⏱️';
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
+}
+
+#clear-history {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transition);
+    position: relative;
+    padding-left: 18px;
+}
+
+#clear-history::before {
+    content: '🗑️';
+    position: absolute;
+    left: 0;
+    font-size: 0.85rem;
+}
+
+#clear-history:hover {
+    color: var(--primary-color);
+}
+
+#history-list {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#history-list li {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+#history-list li:hover {
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+#history-list li:last-child {
+    border-bottom: none;
+}
+
+/* 添加历史记录项的删除按钮样式 */
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.history-item:hover {
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-text {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.delete-history {
+    opacity: 0;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.history-item:hover .delete-history {
+    opacity: 1;
+}
+
+.delete-history:hover {
+    background-color: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+}
+
+/* 深色模式适配 */
+.dark-theme .delete-history:hover {
+    background-color: rgba(255, 123, 58, 0.2);
+}
+
+/* 美化搜索分类面板 */
+.search-panel {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(var(--card-bg-rgb), 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.search-category {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.search-category:last-child {
+    border-bottom: none;
+}
+
+.search-category h2 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 0;
+}
+
+.search-category h2::before {
+    content: none;
+}
+
+.search-category h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.search-category h2:hover::after {
+    width: 50px;
+}
+
+.search-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    padding: 5px;
+}
+
+.search-btn {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 12px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-color);
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    height: 42px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0)
+    );
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+}
+
+.traditional .search-btn:hover {
+    color: var(--traditional-color);
+    background-color: rgba(255, 107, 34, 0.1);
+}
+
+.ai .search-btn:hover {
+    color: var(--ai-color);
+    background-color: rgba(66, 133, 244, 0.1);
+}
+
+.video .search-btn:hover {
+    color: var(--video-color);
+    background-color: rgba(52, 168, 83, 0.1);
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+i.search-icon {
+    font-size: 16px;
+}
+
+.traditional i.search-icon {
+    color: var(--traditional-color);
+}
+
+.ai i.search-icon {
+    color: var(--ai-color);
+}
+
+.video i.search-icon {
+    color: var(--video-color);
+}
+
+.search-btn:hover .search-icon {
+    transform: scale(1.1);
+}
+
+/* 优化深色模式下的搜索框 */
+.dark-theme .search-box {
+    border-color: #3a3a3a;
+}
+
+.dark-theme .search-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 16px rgba(255, 123, 58, 0.2);
+}
+
+/* 优化深色模式下的按钮悬停效果 */
+.dark-theme .search-btn {
+    background-color: #2a2a2a;
+}
+
+.dark-theme .search-btn:hover {
+    background-color: rgba(255, 123, 58, 0.15);
+}
+
+/* 优化深色模式下的历史记录下拉框 */
+.dark-theme .history-dropdown {
+    border-color: #3a3a3a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme #history-list li:hover {
+    background-color: rgba(255, 123, 58, 0.1);
+}
+
+/* 优化深色模式下的主题切换按钮 */
+.dark-theme .theme-toggle {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 添加搜索框和按钮的过渡动画 */
+.search-box,
+.search-btn {
+    will-change: transform;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.search-btn:active {
+    transform: scale(0.95);
+}
+
+/* 优化搜索分类标题图标 */
+.traditional h2::before {
+    content: '🔍';
+}
+
+.ai h2::before {
+    content: '🤖';
+}
+
+.video h2::before {
+    content: '🎬';
+}
+
+/* 添加搜索面板的细微动画 */
+.search-panel {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 紧凑型页脚 */
+footer {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 15px;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--secondary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    transition: var(--transition);
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.theme-btn:hover {
+    color: var(--primary-color);
+    transform: rotate(15deg);
+}
+
+.theme-btn.active {
+    color: var(--primary-color);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .search-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .search-btn {
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    #search-input {
+        padding: 10px 15px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .search-buttons {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+}
+
+/* 添加滚动条美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* 添加加载动画 */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.loading {
+    background: linear-gradient(
+        90deg,
+        rgba(var(--primary-rgb), 0.1) 25%,
+        rgba(var(--primary-rgb), 0.2) 50%,
+        rgba(var(--primary-rgb), 0.1) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* 修改搜索分类标题样式 */
+.search-category h2 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 0;  /* 移除左侧padding */
+}
+
+/* 移除之前的图标样式 */
+.search-category h2::before {
+    content: none;  /* 移除图标 */
+}
+
+/* 添加新的分类标题样式 */
+.search-category h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.search-category h2:hover::after {
+    width: 50px;
+}
+
+/* 优化搜索面板样式 */
+.search-panel {
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.08);
+    border: 1px solid rgba(var(--primary-rgb), 0.1);
+    overflow: hidden;
+}
+
+/* 优化搜索分类区域样式 */
+.search-category {
+    padding: 25px;
+    border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.search-category:hover {
+    background-color: rgba(var(--primary-rgb), 0.02);
+}
+
+/* 优化搜索按钮样式 */
+.search-btn {
+    height: 48px;
+    border-radius: 14px;
+    padding: 8px 12px;
+    background: var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    background: var(--white);
+    box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.15);
+}
+
+/* 优化搜索按钮图标 */
+.search-icon {
+    width: 22px;
+    height: 22px;
+    filter: grayscale(0.2);
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover .search-icon {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+/* 优化搜索按钮文字 */
+.search-btn span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* 优化搜索框样式 */
+.search-box {
+    padding: 6px;
+    border: 2px solid rgba(var(--primary-rgb), 0.1);
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.08);
+}
+
+.search-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.12);
+}
+
+/* 优化深色模式样式 */
+.dark-theme .search-panel {
+    background: rgba(var(--card-bg-rgb), 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .search-category {
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .search-btn {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .search-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 添加页面整体渐变背景 */
+body {
+    background: linear-gradient(
+        135deg,
+        rgba(var(--primary-rgb), 0.05) 0%,
+        rgba(var(--primary-rgb), 0) 100%
+    );
+    min-height: 100vh;
+}
+
+/* 优化页脚样式 */
+footer {
+    margin-top: 35px;
+    padding: 20px 0;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary-color),
+        transparent
+    );
+}
+
+/* 优化主题切换按钮 */
+.theme-toggle {
+    padding: 6px 15px;
+    border-radius: 25px;
+    background: var(--card-bg);
+    box-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.1);
+}
+
+.theme-btn {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.theme-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+/* 聊天机器人分类样式 */
+.chat .search-btn:hover {
+    color: var(--chat-color);
+    background-color: rgba(var(--chat-rgb), 0.1);
+}
+
+.chat i.search-icon {
+    color: var(--chat-color);
+}
+
+/* 社交搜索分类样式 */
+.social .search-btn:hover {
+    color: var(--social-color);
+    background-color: rgba(var(--social-rgb), 0.1);
+}
+
+/* 网盘搜索分类样式 */
+.drive .search-btn:hover {
+    color: var(--drive-color);
+    background-color: rgba(var(--drive-rgb), 0.1);
+}
+
+/* 网盘搜索标题右侧链接样式 */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.category-header a {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.category-header a:hover {
+    color: var(--primary-color);
+} 
