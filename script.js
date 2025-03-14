@@ -250,18 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // 设置焦点到搜索框
     searchInput.focus();
     
-    // 处理图标加载失败的情况
-    document.querySelectorAll('.search-icon').forEach(img => {
-        if (img.tagName === 'IMG') {
-            img.onerror = function() {
-                // 创建一个简单的文本替代图标
-                const span = document.createElement('span');
-                span.className = 'text-icon';
-                span.textContent = img.alt.charAt(0);
-                img.parentNode.replaceChild(span, img);
-            };
-        }
-    });
+    // 添加图标懒加载功能
+    implementLazyLoading();
 
     // 添加滚动事件监听
     let lastScrollTop = 0;
@@ -281,6 +271,87 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScrollTop = currentScroll;
     });
 });
+
+/**
+ * 实现图标的懒加载功能
+ */
+function implementLazyLoading() {
+    // 先显示页面结构，延迟加载图标
+    // 1. 为所有图标添加占位符
+    const allIcons = document.querySelectorAll('.search-icon');
+    
+    allIcons.forEach(icon => {
+        // 如果是img标签
+        if (icon.tagName === 'IMG') {
+            // 保存原始src到data属性
+            if (icon.src) {
+                icon.dataset.src = icon.src;
+                // 清空src，使用占位符或内联SVG作为临时显示
+                icon.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSIjZjBmMGYwIiByeD0iNCIgcnk9IjQiLz48L3N2Zz4=';
+                // 添加loading类用于样式
+                icon.classList.add('icon-loading');
+            }
+        }
+    });
+    
+    // 2. 使用Intersection Observer API检测图标是否进入视口
+    if ('IntersectionObserver' in window) {
+        const iconObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const icon = entry.target;
+                    if (icon.dataset.src) {
+                        // 创建新图像预加载
+                        const img = new Image();
+                        img.onload = function() {
+                            // 图像加载完成后替换
+                            icon.src = icon.dataset.src;
+                            icon.classList.remove('icon-loading');
+                        };
+                        img.onerror = function() {
+                            // 加载失败时使用默认图标
+                            icon.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSIjZjBmMGYwIiByeD0iNCIgcnk9IjQiLz48dGV4dCB4PSI5IiB5PSIxMiIgZm9udC1zaXplPSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5OSI+Pz88L3RleHQ+PC9zdmc+';
+                            icon.classList.remove('icon-loading');
+                        };
+                        img.src = icon.dataset.src;
+                    }
+                    // 停止观察已加载的图标
+                    observer.unobserve(icon);
+                }
+            });
+        }, {
+            rootMargin: '100px 0px', // 提前100px开始加载
+            threshold: 0.1
+        });
+        
+        // 开始观察所有图标
+        allIcons.forEach(icon => {
+            if (icon.tagName === 'IMG' && icon.dataset.src) {
+                iconObserver.observe(icon);
+            }
+        });
+    } else {
+        // 对于不支持IntersectionObserver的浏览器，使用setTimeout延迟加载
+        setTimeout(() => {
+            allIcons.forEach(icon => {
+                if (icon.tagName === 'IMG' && icon.dataset.src) {
+                    icon.src = icon.dataset.src;
+                    icon.classList.remove('icon-loading');
+                }
+            });
+        }, 500); // 延迟500ms加载图标
+    }
+    
+    // 3. 添加错误处理，防止图标加载失败阻塞页面
+    window.addEventListener('error', function(e) {
+        // 检查是否是图片加载错误
+        if (e.target.tagName === 'IMG') {
+            // 替换为默认图标
+            e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSIjZjBmMGYwIiByeD0iNCIgcnk9IjQiLz48dGV4dCB4PSI5IiB5PSIxMiIgZm9udC1zaXplPSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5OSI+Pz88L3RleHQ+PC9zdmc+';
+            e.target.classList.remove('icon-loading');
+        }
+    }, true);
+}
 
 // 添加点击动画和选中按钮样式CSS
 document.head.insertAdjacentHTML('beforeend', `

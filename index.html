@@ -4,8 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聚合搜索</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"> -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            padding-top: 170px;
+            max-width: 100%;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: #f8f9fa;
+            padding: 15px 20px;
+            width: 100%;
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
 </head>
 <body>
     <div class="container">
@@ -37,9 +76,7 @@
         </header>
 
         <main>
-            <!-- 紧凑型搜索区域 -->
             <div class="search-panel">
-                <!-- 传统搜索 -->
                 <div class="search-category traditional">
                     <h2>传统搜索</h2>
                     <div class="search-buttons">
@@ -90,26 +127,6 @@
                     </div>
                 </div>
 
-                <!-- AI聊天机器人 -->
-                <!-- <div class="search-category chat">
-                    <h2>AI聊天机器人</h2>
-                    <div class="search-buttons">
-                        <button class="search-btn" data-url="https://chatgpt.com/?q=">
-                            <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT" class="search-icon">
-                            <span>ChatGPT</span>
-                        </button>
-                        <button class="search-btn" data-url="https://claude.ai/new?q=">
-                            <img src="https://claude.ai/favicon.ico" alt="Claude" class="search-icon">
-                            <span>Claude</span>
-                        </button>
-                        <button class="search-btn" data-url="https://yiyan.baidu.com/?q=">
-                            <img src="https://nlp-eb.cdn.bcebos.com/logo/favicon.ico" alt="文心一言" class="search-icon">
-                            <span>文心一言</span>
-                        </button>
-                    </div>
-                </div> -->
-
-                <!-- AI搜索 -->
                 <div class="search-category ai">
                     <h2>AI 搜索</h2>
                     <div class="search-buttons">
@@ -257,7 +274,6 @@
                     </div>
                 </div>
 
-                <!-- 社交搜索 -->
                 <div class="search-category social">
                     <h2>社交搜索</h2>
                     <div class="search-buttons">
@@ -324,22 +340,6 @@
                     </div>
                 </div>
 
-                <!-- 磁力搜索-->
-                <!-- <div class="search-category magnet">
-                <h2>磁力搜索</h2>
-                <div class="search-buttons">
-                    <button class="search-btn" data-url="https://laowangso.top/search?keyword=">
-                        <img src="https://api.xinac.net/icon/?url=https://laowangso.top" alt="老王磁力" class="search-icon">
-                        <span>老王磁力</span>
-                    </button>
-                    <button class="search-btn" data-url="https://magnetdb.com/w/">
-                        <img src="https://api.xinac.net/icon/?url=https://www.magnetdb.com" alt="磁力搜索" class="search-icon">
-                        <span>磁力搜索</span>
-                    </button>
-                </div>
-                </div> -->
-                
-                <!-- 网盘搜索 -->
                 <div class="search-category drive">
                     <div class="category-header">
                         <h2>网盘搜索</h2>
@@ -453,7 +453,6 @@
                     </div>
                 </div>
 
-                <!-- 影视搜索 -->
                 <div class="search-category video">
                     <h2>影视搜索</h2>
                     <div class="search-buttons">
@@ -571,8 +570,6 @@
                         </button>
                     </div>
                 </div>
-
-                
             </div>
         </main>
 
@@ -581,6 +578,18 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '1';
+            
+            setTimeout(function() {
+                document.querySelectorAll('.skeleton').forEach(function(el) {
+                    el.classList.remove('skeleton');
+                });
+            }, 300);
+        });
+    </script>
+    
+    <script src="script.js" defer></script>
 </body>
 </html> 

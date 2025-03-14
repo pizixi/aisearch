@@ -89,6 +89,8 @@ body {
     line-height: 1.5;
     transition: var(--transition);
     background-image: linear-gradient(to bottom, rgba(59, 130, 246, 0.03), rgba(59, 130, 246, 0));
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
 .container {
@@ -411,11 +413,14 @@ h1 i {
     background-color: rgba(var(--card-bg-rgb), 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px; /* 预估高度 */
 }
 
 .search-category {
     padding: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
 }
 
 .search-category:last-child {
@@ -651,6 +656,9 @@ h1 i {
     flex-shrink: 0;
     transition: all 0.3s ease;
     filter: grayscale(0.3);
+    min-width: 18px;
+    min-height: 18px;
+    display: inline-block;
 }
 
 i.search-icon {
@@ -1341,4 +1349,52 @@ header::after {
         transparent
     );
     pointer-events: none;
+}
+
+/* 添加图标懒加载相关样式 */
+.icon-loading {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+/* 添加图标加载动画 */
+@keyframes iconPulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+}
+
+.icon-loading {
+    animation: iconPulse 1.5s infinite;
+}
+
+/* 确保页面结构不会因为图标加载而跳动 */
+.search-icon {
+    min-width: 18px;
+    min-height: 18px;
+    display: inline-block;
+}
+
+/* 优化页面初始加载 */
+body {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* 添加页面内容优先加载样式 */
+.content-priority {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px; /* 预估高度 */
+}
+
+/* 优化搜索面板的渐进式渲染 */
+.search-panel {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px; /* 预估高度 */
+}
+
+/* 优化图标加载失败的样式 */
+.search-btn img.error {
+    opacity: 0.3;
+    filter: grayscale(1);
 } 
