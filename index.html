@@ -10,8 +10,17 @@
 <body>
     <div class="container">
         <header>
-            <h1>聚合搜索</h1>
-            <div class="subtitle">AI聚合搜索：一次搜索，查看所有结果！</div>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>聚合搜索</h1>
+                    <div class="subtitle">AI聚合搜索：一次搜索，查看所有结果！</div>
+                </div>
+                <div class="theme-toggle">
+                    <span>主题：</span>
+                    <button id="theme-light" class="theme-btn active">浅色</button>
+                    <button id="theme-dark" class="theme-btn">深色</button>
+                </div>
+            </div>
             <div class="search-container">
                 <div class="search-box">
                     <input type="text" id="search-input" placeholder="输入问题搜全网">
@@ -569,11 +578,6 @@
 
         <footer>
             <p>© 2025 聚合搜索 | 一站式搜索解决方案</p>
-            <div class="theme-toggle">
-                <span>主题：</span>
-                <button id="theme-light" class="theme-btn active">浅色</button>
-                <button id="theme-dark" class="theme-btn">深色</button>
-            </div>
         </footer>
     </div>
 

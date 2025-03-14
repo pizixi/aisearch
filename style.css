@@ -92,32 +92,77 @@ body {
 }
 
 .container {
+    padding-top: calc(150px + 20px); /* 减小header高度 + 原padding */
     max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     background-color: var(--body-bg);
     transition: var(--transition);
 }
 
-/* 美化标题 */
+/* 美化标题和header布局 */
 header {
-    text-align: center;
-    margin-bottom: 35px;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--body-bg);
+    padding: 15px 20px; /* 减小内边距 */
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
 }
 
+/* 添加header内容布局 */
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: nowrap;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.theme-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    padding: 0 100px;
+}
+
+/* 调整标题样式 */
 h1 {
-    font-size: 2rem;
-    font-weight: 300; /* 更细的字体 */
-    letter-spacing: 2px; /* 增加字母间距 */
+    font-size: 1.8rem; /* 减小字体大小 */
+    font-weight: 300;
+    letter-spacing: 2px;
     background: linear-gradient(120deg, var(--primary-color), var(--primary-dark), var(--primary-light));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.15); /* 添加微妙阴影 */
+    margin-bottom: 5px; /* 减小底部间距 */
+    text-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.15);
     position: relative;
     display: inline-block;
+    text-align: center;
+    width: auto;
+    margin: 0 auto;
+    padding: 0;
 }
 
 h1::after {
@@ -139,17 +184,19 @@ h1::after {
     text-shadow: 0 2px 15px rgba(255, 123, 58, 0.25);
 }
 
-/* 优化副标题样式 */
+/* 调整副标题样式 */
 .subtitle {
     color: var(--text-light);
-    font-size: 0.8rem;
-    margin: 5px 0 15px;
+    font-size: 0.75rem; /* 减小字体大小 */
+    margin: 5px auto 0;
     letter-spacing: 0.8px;
-    font-weight: 400; /* 增加字重以提高可见度 */
-    opacity: 0.9; /* 提高不透明度 */
+    font-weight: 400;
+    opacity: 0.9;
     position: relative;
-    display: inline-block;
-    padding: 0 15px;
+    display: block;
+    text-align: center;
+    width: auto;
+    padding: 0;
 }
 
 /* 深色模式下的副标题样式 */
@@ -166,7 +213,9 @@ h1 i {
 .search-container {
     position: relative;
     max-width: 900px;
-    margin: 0 auto 40px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0;
 }
 
 .search-box {
@@ -175,9 +224,9 @@ h1 i {
     border-radius: 50px;
     overflow: hidden;
     background-color: var(--card-bg);
-    border: 2px solid #e0e0e0;
+    border: 2px solid rgba(var(--primary-rgb), 0.1);
     transition: var(--transition);
-    padding: 5px;
+    padding: 4px; /* 减小内边距 */
 }
 
 .search-box:focus-within {
@@ -187,10 +236,10 @@ h1 i {
 
 #search-input {
     flex: 1;
-    padding: 15px 25px;
+    padding: 12px 20px; /* 减小内边距 */
     border: none;
     outline: none;
-    font-size: 1.1rem;
+    font-size: 1rem; /* 减小字体大小 */
     background-color: var(--card-bg);
     color: var(--text-color);
 }
@@ -199,12 +248,12 @@ h1 i {
     background-color: var(--primary-color);
     color: var(--white);
     border: none;
-    padding: 0 35px;
+    padding: 0 30px; /* 减小内边距 */
     cursor: pointer;
     transition: var(--transition);
     font-weight: 500;
     border-radius: 50px;
-    font-size: 1.1rem;
+    font-size: 1rem; /* 减小字体大小 */
     letter-spacing: 1px;
 }
 
@@ -215,14 +264,13 @@ h1 i {
 /* 历史记录下拉框 */
 .history-dropdown {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 5px);
     left: 0;
     right: 0;
     background-color: var(--card-bg);
     border-radius: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    margin-top: 10px;
-    z-index: 10;
+    z-index: 1001;
     display: none;
     border: 1px solid rgba(0, 0, 0, 0.05);
     overflow: hidden;
@@ -354,6 +402,8 @@ h1 i {
 
 /* 美化搜索分类面板 */
 .search-panel {
+    position: relative;
+    z-index: 1;
     background-color: var(--card-bg);
     border-radius: 16px;
     backdrop-filter: blur(10px);
@@ -406,60 +456,201 @@ h1 i {
 .search-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 12px;
+    gap: 8px;
     padding: 5px;
 }
 
 .search-btn {
-    background-color: var(--secondary-color);
-    border: none;
+    height: 40px;
     border-radius: 12px;
     padding: 6px 10px;
-    cursor: pointer;
-    transition: var(--transition);
-    color: var(--text-color);
-    font-weight: 500;
+    background: var(--secondary-color);
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    font-size: 0.9rem;
-    height: 42px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     background: linear-gradient(to bottom, 
-        rgba(255, 255, 255, 0.05),
-        rgba(255, 255, 255, 0)
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.5)
     );
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .search-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.2);
+    box-shadow: 0 4px 8px rgba(var(--primary-rgb), 0.15);
+    border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+.traditional .search-btn {
+    border-color: rgba(var(--traditional-rgb), 0.15);
+    background: linear-gradient(to bottom, 
+        rgba(var(--traditional-rgb), 0.02),
+        rgba(var(--traditional-rgb), 0.05)
+    );
 }
 
 .traditional .search-btn:hover {
     color: var(--traditional-color);
-    background-color: rgba(255, 107, 34, 0.1);
+    background: linear-gradient(to bottom, 
+        rgba(var(--traditional-rgb), 0.08),
+        rgba(var(--traditional-rgb), 0.12)
+    );
+    border-color: rgba(var(--traditional-rgb), 0.3);
+}
+
+.ai .search-btn {
+    border-color: rgba(var(--ai-rgb), 0.15);
+    background: linear-gradient(to bottom, 
+        rgba(var(--ai-rgb), 0.02),
+        rgba(var(--ai-rgb), 0.05)
+    );
 }
 
 .ai .search-btn:hover {
     color: var(--ai-color);
-    background-color: rgba(66, 133, 244, 0.1);
+    background: linear-gradient(to bottom, 
+        rgba(var(--ai-rgb), 0.08),
+        rgba(var(--ai-rgb), 0.12)
+    );
+    border-color: rgba(var(--ai-rgb), 0.3);
+}
+
+.video .search-btn {
+    border-color: rgba(var(--video-rgb), 0.15);
+    background: linear-gradient(to bottom, 
+        rgba(var(--video-rgb), 0.02),
+        rgba(var(--video-rgb), 0.05)
+    );
 }
 
 .video .search-btn:hover {
     color: var(--video-color);
-    background-color: rgba(52, 168, 83, 0.1);
+    background: linear-gradient(to bottom, 
+        rgba(var(--video-rgb), 0.08),
+        rgba(var(--video-rgb), 0.12)
+    );
+    border-color: rgba(var(--video-rgb), 0.3);
+}
+
+.social .search-btn {
+    border-color: rgba(var(--social-rgb), 0.15);
+    background: linear-gradient(to bottom, 
+        rgba(var(--social-rgb), 0.02),
+        rgba(var(--social-rgb), 0.05)
+    );
+}
+
+.social .search-btn:hover {
+    color: var(--social-color);
+    background: linear-gradient(to bottom, 
+        rgba(var(--social-rgb), 0.08),
+        rgba(var(--social-rgb), 0.12)
+    );
+    border-color: rgba(var(--social-rgb), 0.3);
+}
+
+.drive .search-btn {
+    border-color: rgba(var(--drive-rgb), 0.15);
+    background: linear-gradient(to bottom, 
+        rgba(var(--drive-rgb), 0.02),
+        rgba(var(--drive-rgb), 0.05)
+    );
+}
+
+.drive .search-btn:hover {
+    color: var(--drive-color);
+    background: linear-gradient(to bottom, 
+        rgba(var(--drive-rgb), 0.08),
+        rgba(var(--drive-rgb), 0.12)
+    );
+    border-color: rgba(var(--drive-rgb), 0.3);
+}
+
+.search-btn.selected {
+    background: linear-gradient(to bottom, 
+        rgba(var(--primary-rgb), 0.12), 
+        rgba(var(--primary-rgb), 0.18)
+    ) !important;
+    border: 1px solid rgba(var(--primary-rgb), 0.35) !important;
+    box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.15) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.dark-theme .search-btn {
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.04)
+    );
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.dark-theme .traditional .search-btn:hover {
+    background: linear-gradient(to bottom, 
+        rgba(var(--traditional-rgb), 0.15),
+        rgba(var(--traditional-rgb), 0.1)
+    );
+    border-color: rgba(var(--traditional-rgb), 0.4);
+    color: var(--traditional-color);
+}
+
+.dark-theme .ai .search-btn:hover {
+    background: linear-gradient(to bottom, 
+        rgba(var(--ai-rgb), 0.15),
+        rgba(var(--ai-rgb), 0.1)
+    );
+    border-color: rgba(var(--ai-rgb), 0.4);
+    color: var(--ai-color);
+}
+
+.dark-theme .video .search-btn:hover {
+    background: linear-gradient(to bottom, 
+        rgba(var(--video-rgb), 0.15),
+        rgba(var(--video-rgb), 0.1)
+    );
+    border-color: rgba(var(--video-rgb), 0.4);
+    color: var(--video-color);
+}
+
+.dark-theme .social .search-btn:hover {
+    background: linear-gradient(to bottom, 
+        rgba(var(--social-rgb), 0.15),
+        rgba(var(--social-rgb), 0.1)
+    );
+    border-color: rgba(var(--social-rgb), 0.4);
+    color: var(--social-color);
+}
+
+.dark-theme .drive .search-btn:hover {
+    background: linear-gradient(to bottom, 
+        rgba(var(--drive-rgb), 0.15),
+        rgba(var(--drive-rgb), 0.1)
+    );
+    border-color: rgba(var(--drive-rgb), 0.4);
+    color: var(--drive-color);
 }
 
 .search-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    filter: grayscale(0.3);
 }
 
 i.search-icon {
@@ -479,6 +670,7 @@ i.search-icon {
 }
 
 .search-btn:hover .search-icon {
+    filter: grayscale(0);
     transform: scale(1.1);
 }
 
@@ -525,7 +717,9 @@ i.search-icon {
 }
 
 .search-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.96);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-color: rgba(var(--primary-rgb), 0.4);
 }
 
 /* 优化搜索分类标题图标 */
@@ -557,81 +751,296 @@ i.search-icon {
     }
 }
 
-/* 紧凑型页脚 */
-footer {
-    margin-top: 25px;
-    text-align: center;
-    color: var(--text-light);
-    font-size: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding-top: 15px;
+/* 优化搜索面板样式 */
+.search-panel {
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.08);
+    border: 1px solid rgba(var(--primary-rgb), 0.1);
+    overflow: hidden;
 }
 
+/* 优化搜索分类区域样式 */
+.search-category {
+    padding: 20px;
+    border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.search-category:hover {
+    background-color: rgba(var(--primary-rgb), 0.02);
+}
+
+/* 优化搜索按钮样式 */
+.search-btn {
+    height: 40px;
+    border-radius: 12px;
+    padding: 6px 10px;
+    background: var(--secondary-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.5)
+    );
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(var(--primary-rgb), 0.15);
+    border-color: rgba(var(--primary-rgb), 0.3);
+}
+
+/* 优化搜索按钮图标 */
+.search-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    filter: grayscale(0.3);
+}
+
+.search-btn:hover .search-icon {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+/* 优化搜索按钮文字 */
+.search-btn span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 24px);
+}
+
+/* 优化搜索框样式 */
+.search-box {
+    padding: 6px;
+    border: 2px solid rgba(var(--primary-rgb), 0.1);
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.08);
+}
+
+.search-box:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 24px rgba(var(--primary-rgb), 0.12);
+}
+
+/* 优化深色模式样式 */
+.dark-theme .search-panel {
+    background: rgba(var(--card-bg-rgb), 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .search-category {
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .search-btn {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .search-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 添加页面整体渐变背景 */
+body {
+    background: linear-gradient(
+        135deg,
+        rgba(var(--primary-rgb), 0.05) 0%,
+        rgba(var(--primary-rgb), 0) 100%
+    );
+    min-height: 100vh;
+}
+
+/* 优化页脚样式 */
+footer {
+    margin-top: 35px;
+    padding: 20px 0;
+    position: relative;
+    text-align: center;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary-color),
+        transparent
+    );
+}
+
+footer p {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* 优化主题切换按钮 */
 .theme-toggle {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     background-color: var(--secondary-color);
-    padding: 4px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 0.8rem; /* 减小字体大小 */
+    white-space: nowrap;
+    min-width: fit-content;
 }
 
 .theme-btn {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 0.9rem; /* 减小字体大小 */
     color: var(--text-light);
     transition: var(--transition);
-    padding: 4px;
-    border-radius: 50%;
+    padding: 3px 8px; /* 减小内边距 */
+    border-radius: 12px;
+    white-space: nowrap;
+    min-width: fit-content;
 }
 
 .theme-btn:hover {
     color: var(--primary-color);
-    transform: rotate(15deg);
 }
 
 .theme-btn.active {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+/* 聊天机器人分类样式 */
+.chat .search-btn:hover {
+    color: var(--chat-color);
+    background-color: rgba(var(--chat-rgb), 0.1);
+}
+
+.chat i.search-icon {
+    color: var(--chat-color);
+}
+
+/* 聊天磁力搜索分类样式 */
+.magnet .search-btn:hover {
+    color: var(--magnet-color);
+    background-color: rgba(var(--magnet-rgb), 0.1);
+}
+
+.magnet i.search-icon {
+    color: var(--magnet-color);
+}
+
+/* 社交搜索分类样式 */
+.social .search-btn:hover {
+    color: var(--social-color);
+    background-color: rgba(var(--social-rgb), 0.1);
+}
+
+/* 网盘搜索分类样式 */
+.drive .search-btn:hover {
+    color: var(--drive-color);
+    background-color: rgba(var(--drive-rgb), 0.1);
+}
+
+/* 网盘搜索标题右侧链接样式 */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.category-header a {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.category-header a:hover {
     color: var(--primary-color);
 }
 
-/* 响应式设计 */
+/* 添加header阴影效果 */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, 
+        rgba(var(--primary-rgb), 0.05),
+        transparent
+    );
+    pointer-events: none;
+}
+
+/* 响应式设计调整 */
 @media (max-width: 768px) {
-    .search-buttons {
-        grid-template-columns: repeat(3, 1fr);
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
     
-    .search-btn {
-        height: 40px;
+    .header-left {
+        align-items: center;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+    
+    .subtitle {
+        text-align: center;
+    }
+    
+    .container {
+        padding-top: calc(180px + 20px); /* 增加移动端header高度 */
     }
 }
 
 @media (max-width: 480px) {
-    .search-buttons {
-        grid-template-columns: repeat(2, 1fr);
+    .theme-toggle span {
+        display: none; /* 在小屏幕上隐藏"主题："文本 */
     }
     
-    .container {
-        padding: 10px;
+    .theme-toggle {
+        padding: 3px 6px;
     }
     
-    h1 {
-        font-size: 1.8rem;
-    }
-    
-    #search-input {
-        padding: 10px 15px;
-    }
-}
-
-@media (min-width: 1440px) {
-    .search-buttons {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    .theme-btn {
+        padding: 3px 6px;
+        font-size: 0.8rem;
     }
 }
 
@@ -679,18 +1088,13 @@ footer {
 /* 修改搜索分类标题样式 */
 .search-category h2 {
     color: var(--text-color);
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-left: 0;  /* 移除左侧padding */
+    font-size: 1rem;
+    margin-bottom: 12px;
 }
 
 /* 移除之前的图标样式 */
 .search-category h2::before {
-    content: none;  /* 移除图标 */
+    content: none;
 }
 
 /* 添加新的分类标题样式 */
@@ -721,7 +1125,7 @@ footer {
 
 /* 优化搜索分类区域样式 */
 .search-category {
-    padding: 25px;
+    padding: 20px;
     border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
     transition: background-color 0.3s ease;
 }
@@ -732,25 +1136,47 @@ footer {
 
 /* 优化搜索按钮样式 */
 .search-btn {
-    height: 48px;
-    border-radius: 14px;
-    padding: 8px 12px;
+    height: 40px;
+    border-radius: 12px;
+    padding: 6px 10px;
     background: var(--secondary-color);
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.5)
+    );
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .search-btn:hover {
     transform: translateY(-2px);
-    background: var(--white);
-    box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.15);
+    box-shadow: 0 4px 8px rgba(var(--primary-rgb), 0.15);
+    border-color: rgba(var(--primary-rgb), 0.3);
 }
 
 /* 优化搜索按钮图标 */
 .search-icon {
-    width: 22px;
-    height: 22px;
-    filter: grayscale(0.2);
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
     transition: all 0.3s ease;
+    filter: grayscale(0.3);
 }
 
 .search-btn:hover .search-icon {
@@ -760,9 +1186,13 @@ footer {
 
 /* 优化搜索按钮文字 */
 .search-btn span {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 24px);
 }
 
 /* 优化搜索框样式 */
@@ -896,4 +1326,19 @@ footer::before {
 
 .category-header a:hover {
     color: var(--primary-color);
+}
+
+/* 添加header阴影效果 */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, 
+        rgba(var(--primary-rgb), 0.05),
+        transparent
+    );
+    pointer-events: none;
 } 

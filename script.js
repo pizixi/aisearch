@@ -262,6 +262,24 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
     });
+
+    // 添加滚动事件监听
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    const scrollThreshold = 50;
+
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // 添加阴影效果
+        if (currentScroll > scrollThreshold) {
+            header.classList.add('header-shadow');
+        } else {
+            header.classList.remove('header-shadow');
+        }
+
+        lastScrollTop = currentScroll;
+    });
 });
 
 // 添加点击动画和选中按钮样式CSS
@@ -316,6 +334,14 @@ document.head.insertAdjacentHTML('beforeend', `
 
 .dark-theme .search-btn.selected span {
     color: var(--primary-light);
+}
+
+.header-shadow {
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.1);
+}
+
+.dark-theme .header-shadow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 </style>
 `); 
