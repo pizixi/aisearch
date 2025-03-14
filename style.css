@@ -84,21 +84,33 @@
 }
 
 body {
-    background-color: var(--body-bg);
-    color: var(--text-color);
-    line-height: 1.5;
-    transition: var(--transition);
-    background-image: linear-gradient(to bottom, rgba(59, 130, 246, 0.03), rgba(59, 130, 246, 0));
+    background: linear-gradient(
+        135deg,
+        rgba(var(--primary-rgb), 0.05) 0%,
+        rgba(var(--primary-rgb), 0) 100%
+    );
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
     padding-top: calc(150px + 20px); /* 减小header高度 + 原padding */
+    padding-bottom: 50px; /* 为固定页脚留出空间 */
     max-width: 100%;
     margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
     background-color: var(--body-bg);
     transition: var(--transition);
+    min-height: 100vh; /* 确保container至少占满整个视口高度 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 让main元素自动填充可用空间 */
+main {
+    flex: 1;
 }
 
 /* 美化标题和header布局 */
@@ -414,8 +426,9 @@ h1 i {
 }
 
 .search-category {
-    padding: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 12px 20px; /* 减小上下内边距 */
+    border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
+    transition: background-color 0.3s ease;
 }
 
 .search-category:last-child {
@@ -424,8 +437,8 @@ h1 i {
 
 .search-category h2 {
     color: var(--text-color);
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+    font-size: 1rem;
+    margin-bottom: 10px; /* 减小标题下方间距 */
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -456,14 +469,14 @@ h1 i {
 .search-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 8px;
-    padding: 5px;
+    gap: 6px; /* 减小按钮之间的间距 */
+    padding: 3px; /* 减小内边距 */
 }
 
 .search-btn {
-    height: 40px;
-    border-radius: 12px;
-    padding: 6px 10px;
+    height: 36px; /* 减小按钮高度 */
+    border-radius: 10px;
+    padding: 5px 8px; /* 减小内边距 */
     background: var(--secondary-color);
     transition: all 0.3s ease;
     display: flex;
@@ -762,7 +775,7 @@ i.search-icon {
 
 /* 优化搜索分类区域样式 */
 .search-category {
-    padding: 20px;
+    padding: 12px 20px; /* 减小上下内边距 */
     border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
     transition: background-color 0.3s ease;
 }
@@ -773,9 +786,9 @@ i.search-icon {
 
 /* 优化搜索按钮样式 */
 .search-btn {
-    height: 40px;
-    border-radius: 12px;
-    padding: 6px 10px;
+    height: 36px; /* 减小按钮高度 */
+    border-radius: 10px;
+    padding: 5px 8px; /* 减小内边距 */
     background: var(--secondary-color);
     transition: all 0.3s ease;
     display: flex;
@@ -862,44 +875,47 @@ i.search-icon {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* 添加页面整体渐变背景 */
-body {
-    background: linear-gradient(
-        135deg,
-        rgba(var(--primary-rgb), 0.05) 0%,
-        rgba(var(--primary-rgb), 0) 100%
-    );
-    min-height: 100vh;
-}
-
 /* 优化页脚样式 */
 footer {
-    margin-top: 35px;
-    padding: 20px 0;
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    background-color: var(--body-bg);
+    border-top: 1px solid rgba(var(--primary-rgb), 0.1);
+    z-index: 999;
     text-align: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: var(--transition);
 }
 
 footer::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--primary-color),
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to top, 
+        rgba(var(--primary-rgb), 0.05),
         transparent
     );
+    pointer-events: none;
 }
 
 footer p {
     width: 100%;
     text-align: center;
     margin: 0 auto;
+    color: var(--text-color);
+    font-size: 0.85rem;
+}
+
+/* 深色主题下的页脚文字颜色 */
+.dark-theme footer p {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* 优化主题切换按钮 */
@@ -975,7 +991,7 @@ footer p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* 减小底部间距 */
 }
 
 .category-header a {
@@ -1125,7 +1141,7 @@ header::after {
 
 /* 优化搜索分类区域样式 */
 .search-category {
-    padding: 20px;
+    padding: 12px 20px; /* 减小上下内边距 */
     border-bottom: 1px solid rgba(var(--primary-rgb), 0.08);
     transition: background-color 0.3s ease;
 }
@@ -1136,9 +1152,9 @@ header::after {
 
 /* 优化搜索按钮样式 */
 .search-btn {
-    height: 40px;
-    border-radius: 12px;
-    padding: 6px 10px;
+    height: 36px; /* 减小按钮高度 */
+    border-radius: 10px;
+    padding: 5px 8px; /* 减小内边距 */
     background: var(--secondary-color);
     transition: all 0.3s ease;
     display: flex;
@@ -1233,6 +1249,8 @@ body {
         rgba(var(--primary-rgb), 0) 100%
     );
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 /* 优化页脚样式 */
@@ -1240,6 +1258,7 @@ footer {
     margin-top: 35px;
     padding: 20px 0;
     position: relative;
+    text-align: center;
 }
 
 footer::before {
@@ -1258,18 +1277,47 @@ footer::before {
     );
 }
 
+footer p {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    color: var(--text-color);
+}
+
+/* 深色主题下的页脚文字颜色 */
+.dark-theme footer p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 /* 优化主题切换按钮 */
 .theme-toggle {
-    padding: 6px 15px;
-    border-radius: 25px;
-    background: var(--card-bg);
-    box-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--secondary-color);
+    padding: 4px 10px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 0.8rem; /* 减小字体大小 */
+    white-space: nowrap;
+    min-width: fit-content;
 }
 
 .theme-btn {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem; /* 减小字体大小 */
+    color: var(--text-light);
+    transition: var(--transition);
+    padding: 3px 8px; /* 减小内边距 */
+    border-radius: 12px;
+    white-space: nowrap;
+    min-width: fit-content;
+}
+
+.theme-btn:hover {
+    color: var(--primary-color);
 }
 
 .theme-btn.active {
@@ -1314,7 +1362,7 @@ footer::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* 减小底部间距 */
 }
 
 .category-header a {
