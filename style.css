@@ -24,8 +24,14 @@
     --video-rgb: 52, 168, 83;
 
     /* 添加聊天机器人分类的颜色变量 */
-    --chat-color: #ff4081;  /* 粉色 */
+    --chat-color: #ff80ab;  /* 亮粉色 */
     --chat-rgb: 255, 64, 129;
+
+    
+    /* 添加磁力搜索分类的颜色变量 */
+    --magnet-color: #ff80ab;  /* 亮粉色 */
+    --magnet-rgb: 255, 64, 129;
+    
 
     /* 添加新的分类颜色变量 */
     --social-color: #e91e63;  /* 粉红色 */
@@ -54,8 +60,7 @@
 
     --card-bg-rgb: 36, 36, 36;
 
-    /* 添加聊天机器人分类的颜色变量 */
-    --chat-color: #ff80ab;  /* 亮粉色 */
+    
 
     /* 深色模式下的颜色 */
     --social-color: #ff4081;  /* 亮粉红色 */
@@ -866,6 +871,16 @@ footer::before {
 
 .chat i.search-icon {
     color: var(--chat-color);
+}
+
+/* 聊天磁力搜索分类样式 */
+.magnet .search-btn:hover {
+    color: var(--magnet-color);
+    background-color: rgba(var(--magnet-rgb), 0.1);
+}
+
+.magnet i.search-icon {
+    color: var(--magnet-color);
 }
 
 /* 社交搜索分类样式 */
