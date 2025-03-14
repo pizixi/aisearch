@@ -152,27 +152,11 @@ h1::after {
     padding: 0 15px;
 }
 
-.subtitle::before,
-.subtitle::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 15px; /* 增加装饰线长度 */
-    height: 1px;
-    background: linear-gradient(to right, transparent, currentColor); /* 使用currentColor跟随文字颜色 */
-    opacity: 0.6; /* 提高装饰线可见度 */
-}
-
 /* 深色模式下的副标题样式 */
 .dark-theme .subtitle {
     color: rgba(255, 255, 255, 0.8); /* 提高深色模式下的对比度 */
 }
 
-/* 深色模式下的装饰线样式 */
-.dark-theme .subtitle::before,
-.dark-theme .subtitle::after {
-    opacity: 0.4; /* 调整深色模式下装饰线的透明度 */
-}
 
 h1 i {
     color: var(--primary-color);
