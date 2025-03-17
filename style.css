@@ -104,6 +104,7 @@ body {
     background-color: var(--body-bg);
     transition: var(--transition);
     min-height: 100vh; /* 确保container至少占满整个视口高度 */
+    max-height: 100vh; /* 确保container最大占满整个视口高度 */
     display: flex;
     flex-direction: column;
 }
